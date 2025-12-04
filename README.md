@@ -1,18 +1,18 @@
-# 🎬 CineTrack - Movie Watchlist Application
+# MovieWatch - Movie Watchlist Application
 
 A modern, responsive movie watchlist application built with React, TypeScript, and Vite. Browse popular movies, search by title, and manage your personal watchlist with a beautiful, intuitive interface.
 
-## ✨ Features
+## Features
 
-- 🔍 **Search Movies** - Search for movies by title using the TMDB API
-- 📋 **Browse Popular Movies** - Discover trending and popular movies
-- ⭐ **Personal Watchlist** - Add and remove movies from your watchlist
-- 🔐 **User Authentication** - Secure login/signup system with protected routes
-- 📱 **Responsive Design** - Beautiful UI that works on all devices
-- 🎨 **Modern UI** - Built with Tailwind CSS and smooth animations
-- 🚀 **Fast Performance** - Powered by Vite for lightning-fast development
+- **Search Movies** - Search for movies by title using the TMDB API
+- **Browse Popular Movies** - Discover trending and popular movies
+- **Personal Watchlist** - Add and remove movies from your watchlist
+- **User Authentication** - Secure login/signup system with protected routes
+- **Responsive Design** - Beautiful UI that works on all devices
+- **Modern UI** - Built with Tailwind CSS and smooth animations
+- **Fast Performance** - Powered by Vite for lightning-fast development
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend Framework:** React 18
 - **Language:** TypeScript
@@ -22,7 +22,7 @@ A modern, responsive movie watchlist application built with React, TypeScript, a
 - **Icons:** Lucide React
 - **API:** The Movie Database (TMDB) API
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -30,7 +30,7 @@ Before you begin, ensure you have the following installed:
 - npm or pnpm package manager
 - A TMDB API key (free - get it from [TMDB](https://www.themoviedb.org/settings/api))
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
@@ -41,13 +41,7 @@ cd movie-watchlist-app
 
 ### 2. Install Dependencies
 
-Using npm:
-
-```bash
-npm install
-```
-
-Or using pnpm:
+using pnpm:
 
 ```bash
 pnpm install
@@ -85,7 +79,7 @@ pnpm dev
 
 The application will open at `http://localhost:5173`
 
-## 📦 Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -93,7 +87,7 @@ The application will open at `http://localhost:5173`
 - `npm run lint` - Run ESLint
 - `npm run typecheck` - Run TypeScript type checking
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 movie-watchlist-app/
@@ -165,11 +159,7 @@ movie-watchlist-app/
 - Never commit your actual API keys
 - TMDB API keys are client-side and have built-in rate limits
 
-### Modifying API Endpoints
-
-Edit `src/services/tmdb.ts` to change API behavior or add new endpoints.
-
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### API Key Issues
 
@@ -187,20 +177,14 @@ Edit `src/services/tmdb.ts` to change API behavior or add new endpoints.
 - Run type checking: `npm run typecheck`
 - Ensure all dependencies are installed
 
-
 [Demo video Google Drive link](https://drive.google.com/file/d/1kCxDVPR07DDzFpDDEFjnVd_zzC9se9Sp/view?usp=sharing) 
 
-
-## 👨‍💻 Author
+## Author
 
 Your Name - MD. Sabrim Faraz
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [The Movie Database (TMDB)](https://www.themoviedb.org/) for the movie data API
-- [Lucide](https://lucide.dev/) for the beautiful icons
+- [Lucide](https://lucide.dev/) for the icons
 - [Tailwind CSS](https://tailwindcss.com/) for the styling framework
-
----
-
-**Happy movie tracking! 🎬🍿**
