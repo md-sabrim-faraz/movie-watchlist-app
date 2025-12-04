@@ -187,9 +187,9 @@ Edit `src/services/tmdb.ts` to change API behavior or add new endpoints.
 - Run type checking: `npm run typecheck`
 - Ensure all dependencies are installed
 
-### Demo video Google Drive link 
 
-`https://drive.google.com/file/d/1kCxDVPR07DDzFpDDEFjnVd_zzC9se9Sp/view?usp=sharing`
+[Demo video Google Drive link](https://drive.google.com/file/d/1kCxDVPR07DDzFpDDEFjnVd_zzC9se9Sp/view?usp=sharing) 
+
 
 ## 👨‍💻 Author
 
