@@ -4,6 +4,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Navbar } from "./components/Navbar";
 import { AuthProvider } from "./contexts/AuthContext";
 import { LoginPage } from "./pages/LoginPage";
+import { MovieDetailsPage } from "./pages/MovieDetailsPage";
 import { SearchPage } from "./pages/SearchPage";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/" element={<Navigate to="/search" replace />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/movie/:id" element={<MovieDetailsPage />} />
             </Routes>
           </div>
         </AuthProvider>
