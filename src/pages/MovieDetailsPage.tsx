@@ -2,6 +2,7 @@ import { AlertCircle, ArrowLeft, Calendar, Star } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner";
+import { WatchlistButton } from "../components/WatchlistButton";
 import type { MovieDetails } from "../services/tmdb";
 import {
   getBackdropUrl,
@@ -112,8 +113,8 @@ export function MovieDetailsPage() {
               <span className="font-medium">Back to Search</span>
             </button>
 
-            <div className="grid md:grid-cols-[350px,1fr] gap-8 lg:gap-12">
-              <div className="space-y-6">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+              <div className="lg:w-[350px] flex-shrink-0 space-y-6">
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
                   <img
@@ -124,9 +125,17 @@ export function MovieDetailsPage() {
                     onError={handlePosterError}
                   />
                 </div>
+
+                <WatchlistButton
+                  movieId={movieId}
+                  title={movie.title}
+                  posterPath={movie.poster_path}
+                  releaseDate={movie.release_date}
+                  className="w-full px-6 py-4 text-lg font-semibold"
+                />
               </div>
 
-              <div className="space-y-6">
+              <div className="flex-1 space-y-6">
                 <div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
                     {movie.title}

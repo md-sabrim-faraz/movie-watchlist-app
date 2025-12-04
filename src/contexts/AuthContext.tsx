@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import type { User, Session } from "../lib/types";
 import * as auth from "../lib/auth";
-import type { Session, User } from "../lib/types";
 
 interface AuthContextType {
   user: User | null;

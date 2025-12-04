@@ -2,9 +2,9 @@ import { AlertCircle, Film, Search as SearchIcon } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "../components/LoadingSpinner";
-
+import { WatchlistButton } from "../components/WatchlistButton";
 import { useAuth } from "../contexts/AuthContext";
-
+import { isInWatchlist } from "../lib/storage";
 import {
   getPopularMovies,
   getPosterUrl,
@@ -17,7 +17,9 @@ export function SearchPage() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const [watchlistMovieIds, setWatchlistMovieIds] = useState<Set<string>>(
+    new Set()
+  );
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -25,6 +27,14 @@ export function SearchPage() {
   useEffect(() => {
     fetchPopularMovies();
   }, []);
+
+  // Update watchlist status when user or movies change
+  useEffect(() => {
+    if (user && movies.length > 0) {
+      loadWatchlistStatus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, movies]);
 
   const fetchPopularMovies = async () => {
     try {
@@ -38,6 +48,20 @@ export function SearchPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const loadWatchlistStatus = () => {
+    if (!user) return;
+
+    const ids = new Set<string>();
+    for (const movie of movies) {
+      const movieIdStr = String(movie.id);
+      const inWatchlist = isInWatchlist(user.id, movieIdStr);
+      if (inWatchlist) {
+        ids.add(movieIdStr);
+      }
+    }
+    setWatchlistMovieIds(ids);
   };
 
   // Search function that can be called for retry
@@ -94,10 +118,10 @@ export function SearchPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-24 pb-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            {query.trim() ? "Search Results" : "Discover Movies"}
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent min-h-[4rem]">
+            Discover Movies
           </h1>
-          <p className="text-slate-400 text-lg">
+          <p className="text-slate-400 text-lg min-h-[1.75rem]">
             {query.trim()
               ? "Find your next favorite film"
               : "Browse our collection and build your perfect watchlist"}
@@ -113,7 +137,7 @@ export function SearchPage() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search for movies..."
+                placeholder="Search by title..."
                 className="w-full bg-transparent text-white placeholder-slate-400 pl-14 pr-6 py-5 text-lg focus:outline-none"
               />
             </div>
@@ -159,6 +183,9 @@ export function SearchPage() {
                   ? getPosterUrl(movie.poster_path, "w342")
                   : "https://images.pexels.com/photos/390089/film-movie-motion-picture-390089.jpeg?auto=compress&cs=tinysrgb&w=400";
                 const rating = movie.vote_average;
+                const isInWatchlistStatus = watchlistMovieIds.has(
+                  String(movie.id)
+                );
 
                 return (
                   <div
@@ -188,6 +215,15 @@ export function SearchPage() {
                           </span>
                         </div>
                       )}
+
+                      {/* Show watchlist status indicator only for authenticated users */}
+                      {user && isInWatchlistStatus && (
+                        <div className="absolute top-3 left-3 bg-emerald-500/90 backdrop-blur-sm px-3 py-1 rounded-full border border-emerald-400/50">
+                          <span className="text-white font-bold text-xs">
+                            ✓ In Watchlist
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-4 space-y-3">
@@ -206,6 +242,15 @@ export function SearchPage() {
                           <Film className="h-4 w-4" />
                           <span className="font-medium text-sm">Details</span>
                         </button>
+
+                        <WatchlistButton
+                          movieId={String(movie.id)}
+                          title={movie.title}
+                          posterPath={movie.poster_path}
+                          releaseDate={movie.release_date}
+                          variant="compact"
+                          className="flex-1"
+                        />
                       </div>
                     </div>
                   </div>
